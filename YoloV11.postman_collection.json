@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "f18f52f7-0311-434f-be2c-394bf2392f6f",
+		"name": "YoloV11",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18887786"
+	},
+	"item": [
+		{
+			"name": "image-detect",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/user/Downloads/BillieEilishO2160622_(19_of_45)_(52153214339)_(cropped_3).jpg"
+						},
+						{
+							"key": "confidence_threshold",
+							"value": "0.5",
+							"type": "text"
+						},
+						{
+							"key": "processing_mode",
+							"value": "detect_and_recognize",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/detect/image/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"detect",
+						"image",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "video-detect",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/user/Downloads/Elizabeth Olsen s First ASMR Video.mp4"
+						},
+						{
+							"key": "confidence_threshold",
+							"value": "0.5",
+							"type": "text"
+						},
+						{
+							"key": "processing_mode",
+							"value": "detect_and_recognize",
+							"type": "text"
+						},
+						{
+							"key": "frame_skip",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "max_frames",
+							"value": "100",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/v1/detect/video",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"detect",
+						"video"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Image",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/download/image/{image_id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"download",
+						"image",
+						"{image_id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Video",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/v1/download/video/{video_id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"v1",
+						"download",
+						"video",
+						"{video_id}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

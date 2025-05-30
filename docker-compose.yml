@@ -1,0 +1,54 @@
+version: '3.9'
+
+services:
+  face-recognition-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: face-recognition-api
+    ports:
+      - "8000:8000"
+    environment:
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - DEBUG=False
+      - DEVICE=auto
+    volumes:
+      - ./models:/app/models
+      - ./uploads:/app/uploads
+      - ./outputs:/app/outputs
+      - ./logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - face-recognition-net
+
+  streamlit-app:
+    build:
+      context: ./streamlit_app
+      dockerfile: Dockerfile
+    container_name: face-recognition-streamlit
+    ports:
+      - "8501:8501"
+    environment:
+      - API_URL=http://face-recognition-api:8000
+      - STREAMLIT_SERVER_HEADLESS=true
+      - STREAMLIT_SERVER_ENABLE_CORS=false
+      - STREAMLIT_SERVER_PORT=8501
+    volumes:
+      - ./streamlit_app:/app
+    depends_on:
+      face-recognition-api:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - face-recognition-net
+
+networks:
+  face-recognition-net:
+    driver: bridge
